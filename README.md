@@ -6,9 +6,23 @@ The model is a historical decision-support tool. It does not predict future retu
 
 ## Demo Preview
 
+The README shows a small curated subset of the generated visual report. The full run creates many more CSVs, PNG charts, Markdown reports, and a static HTML dashboard in `outputs/`.
+
+Historical crisis return heatmap:
+
+![Sector and asset-class crisis return heatmap](assets/crisis_sector_asset_return_heatmap.png)
+
 Historical crisis resilience ranking:
 
 ![Crisis resilience score ranking](assets/resilience_score_ranking.png)
+
+Score decomposition by return, drawdown protection, volatility, and SPY correlation:
+
+![Crisis resilience score decomposition](assets/resilience_score_decomposition.png)
+
+Drawdowns across the aggregated crisis windows:
+
+![Drawdowns across all crisis windows](assets/drawdowns_all_crises.png)
 
 Future crisis category forecast:
 

@@ -222,6 +222,13 @@ def _chart_synopsis(filename: str) -> tuple[str, str, str, str, str]:
             "Higher bars are better historical crisis-resilience scores.",
             "The scoring weights are explicit but subjective and can be changed.",
         ),
+        "resilience_score_decomposition.png": (
+            "Crisis Resilience Score Decomposition",
+            "Historical Scoring",
+            "Breaks the final resilience score into weighted contributions from return, drawdown protection, low volatility, and low SPY correlation.",
+            "Longer stacked bars are stronger total scores; the color mix shows why each asset ranked where it did.",
+            "The decomposition explains the scoring formula, but it still inherits the subjective score weights.",
+        ),
         "drawdowns_all_crises.png": (
             "Drawdowns Across All Crisis Windows",
             "Historical Risk",

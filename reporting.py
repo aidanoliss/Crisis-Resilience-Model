@@ -179,6 +179,7 @@ def generate_static_dashboard(output_dir: str | Path) -> Path:
         {chart_figure(chart_path, "early_warning_regime_gauge.png", "Current early-warning regime")}
         {chart_figure(chart_path, "scenario_risk_map.png", "Scenario risk map")}
         {chart_figure(chart_path, "resilience_score_ranking.png", "Historical resilience ranking")}
+        {chart_figure(chart_path, "resilience_score_decomposition.png", "Resilience score decomposition")}
       </div>
     </section>
 

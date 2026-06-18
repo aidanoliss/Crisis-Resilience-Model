@@ -86,6 +86,7 @@ from visualizations import (
     plot_correlation_heatmap,
     plot_cumulative_returns_by_crisis,
     plot_drawdowns,
+    plot_resilience_score_decomposition,
     plot_resilience_score_bars,
 )
 
@@ -398,6 +399,10 @@ def main() -> None:
         plot_resilience_score_bars(
             scores,
             output_dir / "charts" / "resilience_score_ranking.png",
+        )
+        plot_resilience_score_decomposition(
+            scores,
+            output_dir / "charts" / "resilience_score_decomposition.png",
         )
         print("Generating historical narrative charts...")
         plot_historical_crisis_timeline(

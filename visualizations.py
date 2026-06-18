@@ -159,6 +159,75 @@ def plot_resilience_score_bars(
     return output_path
 
 
+def plot_resilience_score_decomposition(
+    scores: pd.DataFrame,
+    output_file: str | Path,
+    top_n: int | None = None,
+) -> Path:
+    """Plot how each component contributes to the final resilience score."""
+
+    output_path = Path(output_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    component_weights = {
+        "return_score": 40,
+        "drawdown_score": 25,
+        "volatility_score": 20,
+        "correlation_score": 15,
+    }
+    component_labels = {
+        "return_score": "Crisis return",
+        "drawdown_score": "Drawdown protection",
+        "volatility_score": "Low volatility",
+        "correlation_score": "Low SPY correlation",
+    }
+    component_colors = {
+        "return_score": "#2563eb",
+        "drawdown_score": "#16a34a",
+        "volatility_score": "#f59e0b",
+        "correlation_score": "#7c3aed",
+    }
+
+    required_columns = ["ticker", "crisis_resilience_score", *component_weights.keys()]
+    missing = [column for column in required_columns if column not in scores.columns]
+    if missing:
+        raise ValueError(f"Missing score columns for decomposition chart: {missing}")
+
+    chart_data = scores.dropna(subset=["crisis_resilience_score"]).copy()
+    chart_data = chart_data.sort_values("crisis_resilience_score", ascending=True)
+    if top_n is not None:
+        chart_data = chart_data.tail(top_n)
+
+    for column, weight in component_weights.items():
+        chart_data[f"{column}_contribution"] = chart_data[column] * weight
+
+    fig_height = max(6, 0.45 * len(chart_data))
+    fig, ax = plt.subplots(figsize=(12, fig_height))
+    left = pd.Series(0.0, index=chart_data.index)
+
+    for column in component_weights:
+        contribution_col = f"{column}_contribution"
+        ax.barh(
+            chart_data["ticker"],
+            chart_data[contribution_col],
+            left=left,
+            label=component_labels[column],
+            color=component_colors[column],
+        )
+        left = left + chart_data[contribution_col]
+
+    ax.set_title("Crisis Resilience Score Decomposition")
+    ax.set_xlabel("Weighted score contribution, 0-100")
+    ax.set_ylabel("Asset")
+    ax.set_xlim(0, 100)
+    ax.grid(True, axis="x", alpha=0.25)
+    ax.legend(loc="lower right", frameon=True, fontsize=8)
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=170)
+    plt.close(fig)
+    return output_path
+
+
 def _slugify(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
 
