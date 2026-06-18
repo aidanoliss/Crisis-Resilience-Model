@@ -8,15 +8,15 @@ The model is a historical decision-support tool. It does not predict future retu
 
 Historical crisis resilience ranking:
 
-![Crisis resilience score ranking](docs/demo_assets/resilience_score_ranking.png)
+![Crisis resilience score ranking](assets/resilience_score_ranking.png)
 
 Future crisis category forecast:
 
-![Future crisis category forecast](docs/demo_assets/crisis_category_resilience_forecast_heatmap.png)
+![Future crisis category forecast](assets/crisis_category_resilience_forecast_heatmap.png)
 
 Unified alert layer:
 
-![Unified alert scores](docs/demo_assets/unified_alert_scores.png)
+![Unified alert scores](assets/unified_alert_scores.png)
 
 The project also includes a historical visualization layer that annotates the crisis windows with wars, geopolitical shocks, industries that fell, resources that gained importance, company winners, and technology themes that benefited or improved.
 
